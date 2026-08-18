@@ -20,7 +20,7 @@ def cadastrar_evento(eventos, nome, data, local, tema):
     eventos.append(evento)
     print(f"\nEvento '{nome}' cadastrado com sucesso!")
 
-    #Função para procurar evento por nome. 
+#Função para procurar evento por nome. 
 def procurar_evento(eventos, nome):
     for evento in eventos:
         if evento[0].lower() == nome.lower():
@@ -38,7 +38,7 @@ def remover_evento(eventos, nome):
             return
     print(f"\nEvento '{nome}' não encontrado para remoção.")
 
-    #função para validar data no formato dd/mm
+#função para validar data no formato dd/mm
 def validar_data(data):
     import re
     padrao = r"^(0[1-9]|[12][0-9]|3[01])/(0[1-9]|1[0-2])$"
