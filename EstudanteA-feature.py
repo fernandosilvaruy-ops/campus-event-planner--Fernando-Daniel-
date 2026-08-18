@@ -47,3 +47,4 @@ def validar_data(data):
     else:
         print("\nData inválida. Use o formato dd/mm.")
         return False
+    
