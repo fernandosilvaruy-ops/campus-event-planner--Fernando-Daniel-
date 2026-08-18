@@ -2,21 +2,31 @@
 # local de testes de funções
 
 #valores da variavel só representativos para teste da função listar_eventos
-eventos = [
-    ["hackatlon", "25/12", "IFB Riacho Fundo", "Tecnologia"]
-]
+eventobase = {
+    "nome": "hackatlon",
+    "data": "25/12",
+    "local": "Riacho Fundo",
+    "categoria": "Tecnologia"
+}
+
+eventos = []
+
 
 # Funçao responsavel por listar os eventos.
 def listar_eventos(eventos):
     print("\n--- Lista de eventos ---")
     for evento in eventos:
-        print(f"Nome: {evento[0]} | Data: {evento[1]} | Local: {evento[2]} | Tema: {evento[3]}")
-
-listar_eventos(eventos)
+        print(f"Nome: {evento["nome"]} | Data: {evento["data"]} | Local: {evento["local"]} | Categoria: {evento["categoria"]}")
 
 # Função responsável por cadastrar um evento.
-def cadastrar_evento(eventos, nome, data, local, tema):
-    evento = [nome, data, local, tema]
+def cadastrar_evento(eventos, nome, data, local, categoria):
+    evento = {
+        "nome": nome,
+        "data": data,
+        "local": local,
+        "categoria": categoria
+    }
+
     eventos.append(evento)
     print(f"\nEvento '{nome}' cadastrado com sucesso!")
 
@@ -24,7 +34,7 @@ def cadastrar_evento(eventos, nome, data, local, tema):
 def procurar_evento(eventos, nome):
     for evento in eventos:
         if evento[0].lower() == nome.lower():
-            print(f"\nEvento encontrado: Nome: {evento[0]} | Data: {evento[1]} | Local: {evento[2]} | Tema: {evento[3]}")
+            print(f"\nEvento encontrado: Nome: {evento["nome"]} | Data: {evento["data"]} | Local: {evento["local"]} | Categoria: {evento["categoria"]}")
             return evento
     print(f"\nEvento '{nome}' não encontrado.")
     return None
