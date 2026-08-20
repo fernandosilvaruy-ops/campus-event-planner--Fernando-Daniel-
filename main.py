@@ -61,7 +61,7 @@ def validar_data(data):
 #########  EstudanteB-Features
 
 ### menu display ###
-def mostrar_menu():
+def displayMenu():
     print("\n=== Planejador de Eventos do Campus ===")
     print("1 - Listar eventos")
     print("2 - Cadastrar novo evento")
@@ -75,7 +75,7 @@ def mostrar_menu():
 
 
 ### menu chama função ###
-def main():
+def getEscolhaDoUsuario():
     while True:
         mostrar_menu()
         opcao = input("Escolha uma opção: ")
@@ -106,10 +106,21 @@ if __name__ == "__main__":
     main()
 
 
-#### Função filtrar eventos por categoria
+#### Função filtrar eventos por categoria      
 def buscar_evento_categoria():
     categoria_usuario = input("Digite a categoria: ")
 
-  for evento in eventobase:
-    if evento["categoria"] == categoria_usuario:
-        print(evento["nome"])
+    for evento in eventobase:                      ### Definir nomes ###
+        if evento["categoria"] == categoria_usuario: ### Definir nomes ###
+         print(evento["nome"])                    ### Definir nomes ###
+
+
+### Função marcar presença
+def marcarEventoAtendido():
+    listar_eventos(eventos)
+
+    id_escolhido = int(input("Digite o ID do Evento comparecido: "))
+
+    for evento in eventos:
+        if evento["id"] == id_escolhido:
+            evento["atendido"] = True
