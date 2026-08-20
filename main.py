@@ -1,12 +1,5 @@
+import re
 # local de testes de funções
-
-#valores da variavel só representativos para teste da função listar_eventos
-eventobase = {
-    "nome": "hackatlon",
-    "data": "25/12",
-    "local": "Riacho Fundo",
-    "categoria": "Tecnologia"
-}
 
 eventos = []
 
@@ -19,20 +12,20 @@ def listar_eventos(eventos):
 
 # Função responsável por cadastrar um evento.
 def cadastrar_eventos(eventos, nome, data, local, categoria):
-    evento = {
+    eventoBase = {
         "nome": nome,
         "data": data,
         "local": local,
         "categoria": categoria
     }
 
-    eventos.append(evento)
+    eventos.append(eventoBase)
     print(f"\nEvento '{nome}' cadastrado com sucesso!")
 
 #Função para procurar evento por nome. 
-def procurar_evento(eventos, nome):
+def procurar_eventos(eventos, nome):
     for evento in eventos:
-        if evento[0].lower() == nome.lower():
+        if evento["nome"].lower() == nome.lower():
             print(f"\nEvento encontrado: Nome: {evento["nome"]} | Data: {evento["data"]} | Local: {evento["local"]} | Categoria: {evento["categoria"]}")
             return evento
     print(f"\nEvento '{nome}' não encontrado.")
@@ -40,70 +33,21 @@ def procurar_evento(eventos, nome):
 
 #função para remover evento por nome
 def remover_evento(eventos, nome):
+    print("Removendo o evento :", nome)
     for evento in eventos:
-        if evento[0].lower() == nome.lower():
+        if evento["nome"].lower() == nome.lower():
             eventos.remove(evento)
             print(f"\nEvento '{nome}' removido com sucesso!")
             return
     print(f"\nEvento '{nome}' não encontrado para remoção.")
 
 #função para validar data no formato dd/mm
+
+
 def validar_data(data):
-    import re
-    padrao = r"^(0[1-9]|[12][0-9]|3[01])/(0[1-9]|1[0-2])$"
-    if re.match(padrao, data):
-        return True
-    else:
-        print("\nData inválida. Use o formato dd/mm.")
-        return False
+    padrao = r"^(0[1-9]|[12][0-9]|3[01])/(0[1-9]|1[0-2])/\d{4}$"
+    return bool(re.match(padrao, data))
     
-#########  EstudanteB-Features
-
-### menu display ###
-def displayMenu():
-    print("\n=== Planejador de Eventos do Campus ===")
-    print("1 - Listar eventos")
-    print("2 - Cadastrar novo evento")
-    print("3 - Buscar evento pelo nome")
-    print("4 - Deletar evento")
-    print("5 - Validar data")
-    print("6 - Filtrar eventos por categoria")
-    print("7 - Marcar evento atendido")
-    print("8 - Gerar relatório")
-    print("0 - Sair")
-
-
-### menu chama função ###
-def getEscolhaDoUsuario():
-    while True:
-        mostrar_menu()
-        opcao = input("Escolha uma opção: ")
-
-        if opcao == "1":
-            listar_eventos(eventos)
-        elif opcao == "2":
-            cadastrar_eventos(eventos)
-        elif opcao == "3":
-            procurar_eventos(eventos)
-        elif opcao == "4":
-            deletar_eventos(eventos)
-        elif opcao == "5":
-            validar_data(eventos)
-        elif opcao == "6":
-            filtrar_eventos(eventos)
-        elif opcao == "7":
-            marcar_atendido(eventos)
-        elif opcao == "8":
-            gerar_relatório(eventos)            
-        elif opcao == "0":
-            print("Até logo!")
-            break
-        else:
-            print("Opção inválida. Tente novamente.")
-
-if __name__ == "__main__":
-    main()
-
 
 #### Função filtrar eventos por categoria      
 def buscar_evento_categoria():
@@ -123,3 +67,62 @@ def marcarEventoAtendido():
     for evento in eventos:
         if evento["id"] == id_escolhido:
             evento["atendido"] = True
+
+
+### menu display ###
+def mostrar_menu():
+    print("\n=== Planejador de Eventos do Campus ===")
+    print("1 - Listar eventos")
+    print("2 - Cadastrar novo evento")
+    print("3 - Buscar evento pelo nome")
+    print("4 - Deletar evento")
+    print("5 - Validar data")
+    print("6 - Filtrar eventos por categoria")
+    print("7 - Marcar evento atendido")
+    print("8 - Gerar relatório")
+    print("0 - Sair")
+
+def leituraDadoEvento():    
+    nome = input("Entre com o nome do evento: ")
+    data = input("Entre com a data do evento: ")
+    while (validar_data(data) == False):
+        data = input("Entre com a data do evento: ")
+    local = input("Entre com o local do evento: ")
+    categoria = input("Entre com a categoria do evento: ")
+    print("Leitura de dados realizada com sucesso!")
+    return nome, data, local, categoria
+
+### menu chama função ###
+def main():
+    while True:
+        mostrar_menu()
+        opcao = input("Escolha uma opção: ")
+
+        if opcao == "1":
+            listar_eventos(eventos)
+        elif opcao == "2":
+            #cadastrar evento
+            nome, data, local, categoria = leituraDadoEvento()
+            cadastrar_eventos(eventos, nome, data, local, categoria)
+        elif opcao == "3":
+            nome = input("Digite  o nome do evento: ")
+            procurar_eventos(eventos, nome)
+        elif opcao == "4":
+            nome = input("digite o nome do evento a ser removido: ")
+            remover_evento(eventos, nome)
+        elif opcao == "5":
+            validar_data(eventos)  
+        elif opcao == "6":
+            filtrar_eventos(eventos)
+        elif opcao == "7":
+            marcar_atendido(eventos)
+        elif opcao == "8":
+            gerar_relatório(eventos)            
+        elif opcao == "0":
+            print("Até logo!")
+            break
+        else:
+            print("Opção inválida. Tente novamente.")
+
+if __name__ == "__main__":
+    main()
