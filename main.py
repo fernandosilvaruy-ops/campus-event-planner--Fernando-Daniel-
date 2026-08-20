@@ -58,7 +58,7 @@ def validar_data(data):
         print("\nData inválida. Use o formato dd/mm.")
         return False
     
-
+#########  EstudanteB-Features
 
 ### menu display ###
 def mostrar_menu():
@@ -104,3 +104,12 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+
+#### Função filtrar eventos por categoria
+def buscar_evento_categoria():
+    categoria_usuario = input("Digite a categoria: ")
+
+  for evento in eventobase:
+    if evento["categoria"] == categoria_usuario:
+        print(evento["nome"])
