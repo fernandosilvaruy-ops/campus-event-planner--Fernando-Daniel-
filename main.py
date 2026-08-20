@@ -1,4 +1,3 @@
-
 # local de testes de funções
 
 #valores da variavel só representativos para teste da função listar_eventos
@@ -19,7 +18,7 @@ def listar_eventos(eventos):
         print(f"Nome: {evento["nome"]} | Data: {evento["data"]} | Local: {evento["local"]} | Categoria: {evento["categoria"]}")
 
 # Função responsável por cadastrar um evento.
-def cadastrar_evento(eventos, nome, data, local, categoria):
+def cadastrar_eventos(eventos, nome, data, local, categoria):
     evento = {
         "nome": nome,
         "data": data,
