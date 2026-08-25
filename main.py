@@ -126,3 +126,29 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+## geração de relatório ##
+def gerar_relatorio(eventos):
+    total_eventos = len(eventos)
+    categorias = {}
+    total_participados = 0
+
+    # contador de eventos
+    for evento in eventos:
+        categoria = evento["categoria"]
+        
+        if categoria in categorias:
+             categorias[categoria] += 1
+        else:
+             categorias[categoria] = 1
+ 
+        # contador de participantes
+        if evento["atendido"]:
+           total_participados += 1
+
+    # calcula percentual
+    percentual = (total_participados / total_eventos) * 100
+         
+    print("Total de eventos:", total_eventos)
+    print("Eventos por categoria:", categorias)
+    print("Percentual participados:", percentual)
